@@ -63,30 +63,32 @@ def delete_data(index: int):
 	with open (filename, 'w') as f:
 		json.dump(new_data, f, indent=4)
 
-def edit_data(index: int, task: Task):
-	subject = task.subject
-	homework = task.homework
-	due_date = task.due_date
-	important = task.important
-
-	new_data = []
-	with open (filename, "r") as f:
-		temp = json.load(f)
-		data_length = len(temp)-1
-	edit_option = index
-	i = 0
-	for entry in temp:
-		if i == int(edit_option):
-			item_data["subject"] = subject
-			item_data["homework"] = homework
-			item_data["due_date"] = [*due_date.getDate()]
-			item_data["important"] = important
-			new_data.append({"subject": subject, "homework": homework, "due_date": due_date, "important": important})
-		else:
-			new_data.append(entry)
-			i=i+1
-	with open (filename, 'w') as f:
-		json.dump(new_data, f, indent=4)
+def edit_data():
+    view_data()
+    new_data = []
+    with open(filename, "r") as f:
+        temp = json.load(f)
+        data_length = len(temp) - 1
+    edit_option = input(f"pick number 1- {data_length}")
+    i = 0
+    for entry in temp:
+        if i == int(edit_option):
+            name = entry["name"]
+            homework = entry["homework"]
+            due_date = entry["due_date"]
+            name = input("New Name")
+            print(f"Edited Name: {name}")
+            homework = input("New Homework: ")
+            print(f"Edited Homework: {homework}")
+            due_date = input("New Due Date: ")
+            print(f"Edited Due Date: {due_date}")
+            new_data.append({"name": name, "homework": homework, "due_date": due_date})
+            i = i + 1
+        else:
+            new_data.append(entry)
+            i = i + 1
+    with open(filename, 'w') as f:
+        json.dump(new_data, f, indent=4)
 		
 """
 while True:
