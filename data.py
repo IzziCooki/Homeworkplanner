@@ -89,6 +89,11 @@ def edit_data(index: int, task: Task):
 	with open (filename, 'w') as f:
 		json.dump(new_data, f, indent=4)
 		
+def main_loop():
+    for i in range(1000):
+        check_date()
+        time.sleep(86400)
+		
 """
 while True:
 	Choices()
